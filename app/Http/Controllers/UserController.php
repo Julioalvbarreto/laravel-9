@@ -2,17 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateValidation;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return view('users.index');
+        $users = User::get();
+
+        return view('users.index', compact('users'));
     }
 
     public function show($id)
     {
-        echo '<h1>ID ' . $id . '</h1>';
+        //$user = User::where('id', '=', $id)->first();
+        if(!$user = User::find($id)){
+            return redirect()->route('users.index');
+        };
+
+        return view('users.show', compact('user'));
+    }
+
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    public function store(StoreUpdateValidation $request)
+    {
+        // request->all();
+        $data = $request->only([
+                 'name', 'email', 'password'
+        ]);
+        $data['password'] = bcrypt($data['password']);
+        
+        User::create($data);
+
+        return redirect()->route('users.index');
     }
 }
