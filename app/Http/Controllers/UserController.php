@@ -42,4 +42,13 @@ class UserController extends Controller
 
         return redirect()->route('users.index');
     }
+
+    public function edit($id)
+    {
+        if(!$user = User::find($id)){
+            return redirect()->route('users.index');
+        };
+
+        return view('users.edit', compact('user'));
+    }
 }

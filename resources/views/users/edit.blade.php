@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Cadastrar Usuário')
+@section('title', 'Editar Usuário')
 
 @section('content')
     <h1>
-        Novo Usuário
+        Editar o Usuário {{$user->name}}
     </h1>
 
     @if ($errors->any())
@@ -15,12 +15,12 @@
         </ul>   
     @endif
 
-    <form action="{{route('users.store')}}" method="POST">
+    <form action="#" method="POST">
         @csrf
-        <input type="text" name="name" placeholder="Nome" value="{{old('name')}}">
-        <input type="email" name="email" placeholder="exemplo@exemplo.com" value="{{old('email')}}">
+        <input type="text" name="name" placeholder="Nome" value="{{$user->name}}">
+        <input type="email" name="email" placeholder="exemplo@exemplo.com" value="{{$user->email}}">
         <input type="password" name="password" placeholder="Senha">
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Alterar</button>
     </form>
 
 @endsection
