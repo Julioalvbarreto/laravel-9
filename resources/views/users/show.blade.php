@@ -25,5 +25,12 @@
             CRIADO EM = {{ $user->created_at }}
         </li>
     </ul>
+    
+    <button style="margin-bottom: 10px;"><a href="{{route('users.index')}}">Retornar</a></button>
+    <form action="{{route('users.delete', $user->id)}}" method="POST">
+        @method('DELETE')
+        @csrf
+        <button type="submit">Deletar</button>
+    </form>
 
 @endsection
